@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Студия маникюра «Лаванда» — демо-сайт</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf8f6; --card:#ffffff; --line:#eee5e1; --text:#2f2a2c; --muted:#8a7f82;
+    --accent:#b9848f; --accent-dark:#9d6a75; --soft:#f4ebe8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.55}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .demo-badge{background:var(--text);color:#fff;text-align:center;font-size:13px;padding:6px 10px}
+
+  header{position:sticky;top:0;z-index:10;background:rgba(251,248,246,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:600;letter-spacing:.5px}
+  .nav-links{display:flex;gap:24px;font-size:15px;color:var(--muted)}
+  .nav-links a:hover{color:var(--text)}
+  .btn{display:inline-block;background:var(--accent);color:#fff;font-weight:600;padding:12px 22px;border-radius:999px;border:none;cursor:pointer;font-size:15px;font-family:inherit;transition:.2s}
+  .btn:hover{background:var(--accent-dark)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{background:var(--soft)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  .hero{padding:80px 0 72px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+  @media(max-width:820px){.hero-grid{grid-template-columns:1fr}}
+  .hero h1{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:clamp(42px,6.5vw,68px);line-height:1.05}
+  .hero p{color:var(--muted);font-size:18px;max-width:480px;margin:20px 0 30px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .facts{display:flex;gap:36px;margin-top:44px;flex-wrap:wrap}
+  .facts b{display:block;font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:600}
+  .facts span{color:var(--muted);font-size:14px}
+  .hero-art{aspect-ratio:4/5;border-radius:200px 200px 24px 24px;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 30% 25%,#f6dfe2,transparent 55%),radial-gradient(circle at 75% 70%,#e8cfd5,transparent 55%),linear-gradient(160deg,#f3e6e3,#e9d6d6)}
+  .nails{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;gap:14px;padding-bottom:22%}
+  .nail{width:44px;border-radius:22px 22px 10px 10px;box-shadow:inset 0 6px 10px rgba(255,255,255,.45),0 8px 18px rgba(120,70,80,.18)}
+
+  section{padding:76px 0}
+  h2{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:clamp(34px,5vw,46px);margin-bottom:10px}
+  .sub{color:var(--muted);margin-bottom:36px}
+
+  .prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
+  .price-group{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px}
+  .price-group h3{font-size:14px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:14px}
+  .row-price{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px dashed var(--line)}
+  .row-price:last-child{border-bottom:none}
+  .row-price small{display:block;color:var(--muted);font-size:13px}
+  .row-price b{white-space:nowrap;font-weight:600}
+
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+  .work{aspect-ratio:1;border-radius:18px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:12px}
+  .work span{background:rgba(255,255,255,.85);border-radius:999px;padding:4px 12px;font-size:12px}
+
+  .masters{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .master{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;text-align:center}
+  .avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:40px;color:#fff}
+  .master p{color:var(--muted);font-size:14px}
+
+  .reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .review{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
+  .stars{color:var(--accent);letter-spacing:2px;margin-bottom:8px}
+  .review small{display:block;color:var(--muted);margin-top:12px}
+
+  .booking{background:var(--soft)}
+  .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  @media(max-width:820px){.booking-grid{grid-template-columns:1fr}}
+  form{display:grid;gap:14px;background:var(--card);padding:26px;border-radius:20px;border:1px solid var(--line)}
+  label{font-size:14px;color:var(--muted);display:grid;gap:6px}
+  input,select{background:var(--bg);border:1px solid var(--line);color:var(--text);padding:13px 14px;border-radius:12px;font-size:15px;font-family:inherit}
+  input:focus,select:focus{outline:none;border-color:var(--accent)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .ok{display:none;background:var(--card);border:1px solid var(--accent);border-radius:20px;padding:22px}
+  .ok b{color:var(--accent-dark)}
+  .perks{list-style:none;display:grid;gap:12px;margin-top:26px}
+  .perks li{display:flex;gap:10px;align-items:flex-start}
+  .perks li::before{content:"✓";color:var(--accent);font-weight:700}
+
+  .contacts{display:grid;grid-template-columns:1fr 1.2fr;gap:32px}
+  @media(max-width:820px){.contacts{grid-template-columns:1fr}}
+  .contact-list{display:grid;gap:18px}
+  .contact-list span{display:block;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:1px}
+  .contact-list b{font-size:18px;font-weight:500}
+  .map{border-radius:20px;border:1px solid var(--line);min-height:280px;position:relative;overflow:hidden;
+    background:linear-gradient(90deg,transparent 49%,#eadfdb 49% 51%,transparent 51%) 0 0/80px 80px,
+      linear-gradient(0deg,transparent 49%,#eadfdb 49% 51%,transparent 51%) 0 0/80px 80px,#f5efec}
+  .pin{position:absolute;left:50%;top:45%;transform:translate(-50%,-100%);text-align:center}
+  .pin div{width:22px;height:22px;background:var(--accent);border-radius:50% 50% 50% 0;transform:rotate(-45deg);margin:0 auto;box-shadow:0 0 0 8px rgba(185,132,143,.2)}
+  .pin span{display:block;margin-top:14px;background:#fff;padding:4px 10px;border-radius:8px;font-size:13px;border:1px solid var(--line)}
+
+  footer{padding:32px 0;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Демо-пример сайта · студия вымышленная</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">Лаванда</a>
+    <nav class="nav-links">
+      <a href="#prices">Цены</a>
+      <a href="#works">Работы</a>
+      <a href="#masters">Мастера</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a href="#booking" class="btn">Записаться</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Маникюр, который держится и радует</h1>
+        <p>Аккуратный маникюр и педикюр в центре Севастополя. Стерильные инструменты, носка покрытия до 4 недель и запись онлайн за минуту.</p>
+        <div class="hero-actions">
+          <a href="#booking" class="btn">Записаться онлайн</a>
+          <a href="#prices" class="btn btn-ghost">Смотреть цены</a>
+        </div>
+        <div class="facts">
+          <div><b>5,0 ★</b><span>рейтинг на картах</span></div>
+          <div><b>3–4 нед.</b><span>носка покрытия</span></div>
+          <div><b>9:00–21:00</b><span>ежедневно</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="nails">
+          <div class="nail" style="height:120px;background:linear-gradient(180deg,#d9a3ad,#b9848f)"></div>
+          <div class="nail" style="height:150px;background:linear-gradient(180deg,#f2d6d9,#e2b9bf)"></div>
+          <div class="nail" style="height:165px;background:linear-gradient(180deg,#c48f9a,#9d6a75)"></div>
+          <div class="nail" style="height:145px;background:linear-gradient(180deg,#f7e7e4,#e8cfcf)"></div>
+          <div class="nail" style="height:110px;background:linear-gradient(180deg,#d9a3ad,#b9848f)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="prices">
+    <div class="wrap">
+      <h2>Услуги и цены</h2>
+      <p class="sub">Окончательная стоимость зависит от длины и дизайна, мастер скажет её до начала работы.</p>
+      <div class="prices">
+        <div class="price-group">
+          <h3>Маникюр</h3>
+          <div class="row-price"><div>Маникюр без покрытия<small>Комбинированный, 40 минут</small></div><b>900 ₽</b></div>
+          <div class="row-price"><div>Маникюр + гель-лак<small>Однотонное покрытие</small></div><b>1 800 ₽</b></div>
+          <div class="row-price"><div>Укрепление + гель-лак<small>Для тонких и ломких ногтей</small></div><b>2 100 ₽</b></div>
+          <div class="row-price"><div>Наращивание<small>Любая форма, длина до 3</small></div><b>2 800 ₽</b></div>
+        </div>
+        <div class="price-group">
+          <h3>Педикюр и дизайн</h3>
+          <div class="row-price"><div>Педикюр + гель-лак<small>Полная обработка стоп</small></div><b>2 400 ₽</b></div>
+          <div class="row-price"><div>Мужской маникюр<small>Гигиенический, без покрытия</small></div><b>1 000 ₽</b></div>
+          <div class="row-price"><div>Френч / втирка<small>За все ногти</small></div><b>+300 ₽</b></div>
+          <div class="row-price"><div>Маникюр + педикюр в 4 руки<small>Два мастера, экономия часа</small></div><b>4 000 ₽</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <h2>Наши работы</h2>
+      <p class="sub">Здесь будут настоящие фото работ мастеров студии.</p>
+      <div class="gallery">
+        <div class="work" style="background:linear-gradient(135deg,#f2d6d9,#d9a3ad)"><span>Нюд</span></div>
+        <div class="work" style="background:linear-gradient(135deg,#fff,#f0e2e0 60%,#fff)"><span>Френч</span></div>
+        <div class="work" style="background:linear-gradient(135deg,#9d6a75,#5e3f47)"><span>Бордо</span></div>
+        <div class="work" style="background:linear-gradient(135deg,#e7e1f0,#c9bedd)"><span>Лаванда</span></div>
+        <div class="work" style="background:linear-gradient(135deg,#f6e7c8,#d9bb85)"><span>Втирка</span></div>
+        <div class="work" style="background:linear-gradient(135deg,#dfe9e2,#aac4b3)"><span>Шалфей</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="masters">
+    <div class="wrap">
+      <h2>Мастера</h2>
+      <p class="sub">Выберите мастера при записи или оставьте выбор нам.</p>
+      <div class="masters">
+        <div class="master"><div class="avatar" style="background:#b9848f">А</div><h3>Анна</h3><p>Топ-мастер · дизайн и наращивание</p></div>
+        <div class="master"><div class="avatar" style="background:#c9a7ae">В</div><h3>Виктория</h3><p>Мастер · маникюр и укрепление</p></div>
+        <div class="master"><div class="avatar" style="background:#a99bb8">Е</div><h3>Елена</h3><p>Мастер · педикюр</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <h2>Отзывы</h2>
+      <p class="sub">Сюда подставляются настоящие отзывы клиенток, например с Яндекс Карт.</p>
+      <div class="reviews">
+        <div class="review"><div class="stars">★★★★★</div><p>Пример отзыва: короткий текст о том, что понравилось клиентке.</p><small>Имя · Яндекс Карты</small></div>
+        <div class="review"><div class="stars">★★★★★</div><p>Пример отзыва: здесь будет реальный отзыв, взятый с разрешения.</p><small>Имя · Яндекс Карты</small></div>
+        <div class="review"><div class="stars">★★★★★</div><p>Пример отзыва: два-три предложения смотрятся лучше всего.</p><small>Имя · Яндекс Карты</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking" class="booking">
+    <div class="wrap booking-grid">
+      <div>
+        <h2>Онлайн-запись</h2>
+        <p class="sub" style="margin-bottom:0">Оставьте заявку, и администратор напишет вам, чтобы подтвердить время.</p>
+        <ul class="perks">
+          <li>Инструменты стерилизуются и вскрываются при вас</li>
+          <li>Гарантия на покрытие 7 дней</li>
+          <li>Заявки с сайта сразу приходят администратору в Telegram</li>
+        </ul>
+      </div>
+      <div>
+        <form id="form">
+          <label>Ваше имя<input required name="name" placeholder="Например, Мария"></label>
+          <label>Телефон<input required name="phone" type="tel" placeholder="+7 (978) 000-00-00"></label>
+          <label>Услуга
+            <select name="service">
+              <option>Маникюр + гель-лак</option><option>Маникюр без покрытия</option><option>Укрепление + гель-лак</option>
+              <option>Наращивание</option><option>Педикюр + гель-лак</option><option>Маникюр + педикюр в 4 руки</option>
+            </select>
+          </label>
+          <div class="two">
+            <label>Дата<input name="date" type="date"></label>
+            <label>Время
+              <select name="time"><option>Утро</option><option>День</option><option>Вечер</option></select>
+            </label>
+          </div>
+          <button class="btn" type="submit">Отправить заявку</button>
+        </form>
+        <div class="ok" id="ok"><b>Это демо.</b> На настоящем сайте заявка сейчас ушла бы администратору в Telegram, и клиентке бы написали.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts">
+    <div class="wrap">
+      <h2>Контакты</h2>
+      <p class="sub">Рядом остановка общественного транспорта.</p>
+      <div class="contacts">
+        <div class="contact-list">
+          <div><span>Адрес</span><b>Севастополь, ул. Примерная, 1</b></div>
+          <div><span>Телефон</span><b>+7 (978) 000-00-00</b></div>
+          <div><span>Режим работы</span><b>Ежедневно 9:00–21:00</b></div>
+          <div><span>Соцсети</span><b>Telegram · VK</b></div>
+        </div>
+        <div class="map"><div class="pin"><div></div><span>Лаванда · студия маникюра</span></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© Студия маникюра «Лаванда», Севастополь</footer>
+
+<script>
+  document.getElementById('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    this.style.display='none';
+    document.getElementById('ok').style.display='block';
+  });
+</script>
+</body>
+</html>
